@@ -6,8 +6,10 @@ $output = fopen('php://output', 'w');
 
 fputcsv($output, array('itemcode', 'itemname', 'categ','price'));
 
-include('../../config.php');  
-$rows = mysql_query('SELECT itemcode,itemname,categ,price from caffaine');
+include_once('../../config.php');
+$sql = 'SELECT itemcode,itemname,categ,price from caffaine';
+$stmt = $conn1->prepare($sql);
+$stmt->execute();
 
-while ($row = mysql_fetch_assoc($rows)) fputcsv($output, $row);
+while ($row = $stmt->fetch(PDO::FETCH_NUM)) fputcsv($output, $row);
 ?>
