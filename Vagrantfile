@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
                 mysql -u root -e "CREATE USER '#{databaseuser}'@'%' IDENTIFIED BY '#{databasepass}';"
                 mysql -u root -e "GRANT ALL PRIVILEGES ON xvwa.* TO '#{databaseuser}'@'%' WITH GRANT OPTION;"
                 service apache2 force-reload
+                wget --quiet http://localhost/xvwa/setup/?action=do
         END
 
 
